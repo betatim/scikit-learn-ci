@@ -15,6 +15,7 @@ jobs:
           conda install -n base conda conda-libmamba-solver -y
           conda config --set solver libmamba
           conda install -c conda-forge "numpy" -y
+          python --version
       - name: Checkout code
         uses: actions/checkout@v2
         with:
