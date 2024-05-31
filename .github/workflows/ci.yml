@@ -40,4 +40,4 @@ jobs:
         run: |
           conda list
           echo =======
-          which conda
+          conda info
