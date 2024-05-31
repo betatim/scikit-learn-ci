@@ -12,6 +12,10 @@ jobs:
   scikit-learn:
     runs-on: ubuntu-latest
     name: Test scikit-learn
+    defaults:
+      run:
+        # Needed so that automatically activiating the `test` conda env works
+        shell: bash -el {0}
     steps:
       - uses: actions/setup-python@v4
         with:
