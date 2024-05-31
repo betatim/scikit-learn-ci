@@ -5,6 +5,8 @@ on:
       pr_id:
         required: true
 
+permissions: read-all
+
 jobs:
   scikit-learn:
     runs-on: ubuntu-latest
@@ -19,6 +21,7 @@ jobs:
         if: inputs.pr_id
         env:
           PR_ID: ${{ inputs.pr_id }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           echo "Checking out Pull Request" ${{ env.PR_ID }}
           gh pr checkout ${{ env.PR_ID }}
