@@ -4,6 +4,7 @@ on:
     inputs:
       pr_id:
         required: true
+        description: Test the contents of this Pull Request
 
 permissions: read-all
 
