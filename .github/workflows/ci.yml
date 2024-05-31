@@ -26,8 +26,16 @@ jobs:
         run: |
           echo "Checking out Pull Request" ${{ env.PR_ID }}
           gh pr checkout ${{ env.PR_ID }}
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: false
+          activate-environment: test
+          environment-file: pylatest_conda_forge_mkl_array-api_linux-64_conda.lock
       - name: List repo contents
         run: |
           ls -hals *
           echo ===============
           git log -1
+      - name: conda, conda, conda
+        run: |
+          conda list
