@@ -1,5 +1,9 @@
 on:
+  # Manually trigger this workflow, using the code from a particular PR
   workflow_dispatch:
+    inputs:
+      pr_id:
+        required: true
 
 jobs:
   scikit-learn:
@@ -8,21 +12,18 @@ jobs:
     steps:
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
-      - name: Install dependencies
-        run: |
-          source $CONDA/bin/activate
-          conda install -n base conda conda-libmamba-solver -y
-          conda config --set solver libmamba
-          conda install -c conda-forge "numpy" -y
-          python --version
-      - name: Checkout code
+          python-version: '3.12'
+      - name: Checkout main repository
         uses: actions/checkout@v2
-        with:
-          repository: scikit-learn/scikit-learn
-      - name: Configure git
+      - name: Checkout a particular Pull Request
+        if: inputs.pr_id
+        env:
+          PR_ID: ${{ inputs.pr_id }}
         run: |
-          git config --global user.name "CI Bot"
-          git config --global user.email "noreply@myemail.com"
-          git remote add upstream https://github.com/my-user/myapp.git
-        shell: bash
+          echo "Checking out Pull Request" ${{ env.PR_ID }}
+          gh pr checkout ${{ env.PR_ID }}
+      - name: List repo contents
+        run: |
+          ls -hals *
+          echo ===============
+          git log -1
