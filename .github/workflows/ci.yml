@@ -27,6 +27,14 @@ jobs:
           auto-update-conda: false
           activate-environment: test
           environment-file: pylatest_conda_forge_mkl_array-api_linux-64_conda.lock
+      - name: Cache conda env
+        id: cache-conda
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-conda-env
+        with:
+          path: /usr/share/miniconda
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('pylatest_conda_forge_mkl_array-api_linux-64_conda.lock') }}
       - name: Checkout a particular Pull Request
         if: inputs.pr_id
         env:
