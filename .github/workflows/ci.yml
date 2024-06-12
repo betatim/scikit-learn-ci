@@ -27,10 +27,6 @@ jobs:
           python-version: '3.12'
       - name: Checkout main repository
         uses: actions/checkout@v2
-      - name: Store commit SHA
-        id: commit-sha
-        run: |
-          echo SHA=$(git rev-parse HEAD) >> "$GITHUB_OUTPUT"
       - name: Checkout a particular Pull Request
         if: inputs.pr_id
         env:
@@ -39,6 +35,10 @@ jobs:
         run: |
           echo "Checking out Pull Request" ${{ env.PR_ID }}
           gh pr checkout ${{ env.PR_ID }}
+      - name: Store commit SHA
+        id: commit-sha
+        run: |
+          echo SHA=$(git rev-parse HEAD) >> "$GITHUB_OUTPUT"
       - name: List repo contents
         id: tests
         run: |
