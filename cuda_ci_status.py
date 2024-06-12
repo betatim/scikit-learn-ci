@@ -1,6 +1,7 @@
 # This script is used by the CUDA CI workflow to comment on a PR
 # as well as add a commit status to the commit it tests.
 import os
+from textwrap import dedent
 
 import requests
 
@@ -100,12 +101,15 @@ if __name__ == "__main__":
 
     comment = find_first_bot_comment(repo, token, pr_number)
 
-    message = f"""The CUDA CI bot has run a workflow to check the changes of this PR
+    # end first line with \ to avoid the annoying empty line!
+    message = f"""\
+    The CUDA CI bot has run a workflow to check the changes of this PR
     ({sha}).
 
     Workflow status: {workflow_status}
     Details: {details_url}
     """
+    message = dedent(message)
 
     if comment is None:
         create_bot_comment(message, repo, pr_number, token)
