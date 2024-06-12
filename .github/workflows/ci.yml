@@ -12,6 +12,9 @@ jobs:
   scikit-learn:
     runs-on: ubuntu-latest
     name: Test scikit-learn
+    permissions:
+      pull-requests: write
+      issues: write
     defaults:
       run:
         # Needed so that automatically activiating the `test` conda env works
