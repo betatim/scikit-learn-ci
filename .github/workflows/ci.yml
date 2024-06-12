@@ -59,4 +59,5 @@ jobs:
           BRANCH_SHA: ${{ steps.commit-sha.outputs.SHA }}
           WORKFLOW_STATUS: ${{ steps.tests.outcome }}
         run: |
-          env
+          python -m pip install requests
+          python ./build_tools/cuda_ci_comment.py
