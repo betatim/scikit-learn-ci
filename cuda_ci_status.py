@@ -75,7 +75,7 @@ def add_commit_status(commit_id, workflow_status, details_url, token):
     else:
         state = "failure"
 
-    response = requests.patch(
+    response = requests.post(
         f"https://api.github.com/repos/{repo}/statuses/{commit_id}",
         headers=get_headers(token),
         json={
@@ -103,8 +103,7 @@ if __name__ == "__main__":
 
     # end first line with \ to avoid the annoying empty line!
     message = f"""\
-    The CUDA CI bot has run a workflow to check the changes of this PR
-    ({sha}).
+    The CUDA CI bot has run a workflow to check the changes of this PR ({sha}).
 
     Workflow status: {workflow_status}
     Details: {details_url}
