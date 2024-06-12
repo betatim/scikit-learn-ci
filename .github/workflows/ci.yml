@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       pr_id:
-        required: true
+        required: false
         description: Test the contents of this Pull Request
 
 permissions: read-all
