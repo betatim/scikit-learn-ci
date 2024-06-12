@@ -17,11 +17,17 @@ jobs:
         # Needed so that automatically activiating the `test` conda env works
         shell: bash -el {0}
     steps:
+      - run: |
+          env
       - uses: actions/setup-python@v4
         with:
           python-version: '3.12'
       - name: Checkout main repository
         uses: actions/checkout@v2
+      - name: Store commit SHA
+        id: commit-sha
+        run: |
+          echo SHA=$(git rev-parse HEAD) >> "$GITHUB_OUTPUT"
       - uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: false
@@ -44,6 +50,7 @@ jobs:
           echo "Checking out Pull Request" ${{ env.PR_ID }}
           gh pr checkout ${{ env.PR_ID }}
       - name: List repo contents
+        id: tests
         run: |
           ls -hals *
           echo ===============
@@ -53,3 +60,13 @@ jobs:
           conda list
           echo =======
           conda info
+      - name: Create or update PR comment
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ inputs.pr_id }}
+          RUN_ID: ${{ github.run_id }}
+          BRANCH_SHA: ${{ steps.commit-sha.outputs.SHA }}
+          WORKFLOW_STATUS: ${{ steps.tests.outcome }}
+        run: |
+          env
