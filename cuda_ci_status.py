@@ -49,10 +49,10 @@ def create_bot_comment(message, repo, pr_number, token):
     response.raise_for_status()
 
 
-def update_bot_comment(comment_id, message, repo, pr_number, token):
+def update_bot_comment(comment_id, message, repo, token):
     """Update the bot's comment"""
     response = requests.patch(
-        f"https://api.github.com/repos/{repo}/issues/comments/{comment['id']}",
+        f"https://api.github.com/repos/{repo}/issues/comments/{comment_id}",
         headers=get_headers(token),
         json={"body": message},
     )
@@ -108,8 +108,8 @@ if __name__ == "__main__":
     """
 
     if comment is None:
-        create_bot_comment(message, repo, pr_number, run_id, token)
+        create_bot_comment(message, repo, pr_number, token)
     else:
-        update_bot_comment(comment["id"], message, repo, pr_number, run_id, token)
+        update_bot_comment(comment["id"], message, repo, token)
 
     add_commit_status(sha, workflow_status, details_url, token)
