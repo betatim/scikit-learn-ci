@@ -60,4 +60,4 @@ jobs:
           WORKFLOW_STATUS: ${{ steps.tests.outcome }}
         run: |
           python -m pip install requests
-          python ./build_tools/cuda_ci_comment.py
+          python ./cuda_ci_comment.py
