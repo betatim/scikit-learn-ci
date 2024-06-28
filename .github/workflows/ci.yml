@@ -24,10 +24,6 @@ jobs:
           python-version: '3.12'
       - name: Checkout main repository
         uses: actions/checkout@v2
-      - name: Store commit SHA
-        id: commit-sha
-        run: |
-          echo SHA=$(git rev-parse HEAD) >> "$GITHUB_OUTPUT"
       - name: List repo contents
         id: tests
         run: |
@@ -45,7 +41,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           RUN_ID: ${{ github.run_id }}
-          BRANCH_SHA: ${{ steps.commit-sha.outputs.SHA }}
+          BRANCH_SHA: ${{ github.event.pull_request.head.sha }}
           WORKFLOW_STATUS: ${{ steps.tests.outcome }}
         run: |
           python -m pip install requests
