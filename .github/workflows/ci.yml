@@ -11,6 +11,7 @@ permissions: read-all
 jobs:
   scikit-learn:
     runs-on: ubuntu-latest
+    environment: CUDA CI
     name: Test scikit-learn
     permissions:
       pull-requests: write
