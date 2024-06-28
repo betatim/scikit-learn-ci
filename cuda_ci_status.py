@@ -112,4 +112,4 @@ if __name__ == "__main__":
     else:
         update_bot_comment(comment["id"], message, repo, token)
 
-    add_commit_status(sha, workflow_status, details_url, token)
+    #add_commit_status(sha, workflow_status, details_url, token)
