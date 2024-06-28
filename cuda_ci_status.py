@@ -101,7 +101,8 @@ if __name__ == "__main__":
 
     comment = find_first_bot_comment(repo, token, pr_number)
 
-    message = f"""The CUDA CI bot has run a workflow to check the changes of this PR
+    message = f"""\
+    The CUDA CI bot has run a workflow to check the changes of this PR
     ({sha}).
 
     Workflow status: {workflow_status}
