@@ -74,7 +74,7 @@ def add_commit_status(commit_id, workflow_status, details_url, token):
     else:
         state = "failure"
 
-    response = requests.patch(
+    response = requests.post(
         f"https://api.github.com/repos/{repo}/statuses/{commit_id}",
         headers=get_headers(token),
         json={
