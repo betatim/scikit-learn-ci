@@ -24,6 +24,11 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.12'
+      # This is here todelay the repo checkout, making it easier to push
+      # a commit after the workflow has started
+      - name: Sleep for 30s
+        run: |
+          sleep 30
       - name: Checkout main repository
         uses: actions/checkout@v2
       - name: List repo contents
