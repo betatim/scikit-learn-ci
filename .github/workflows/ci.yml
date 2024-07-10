@@ -3,8 +3,9 @@ on:
     types:
       - labeled
 
+# No permissions by default
 permissions:
-  pull-requests: write
+  contents: read
 
 jobs:
   scikit-learn:
@@ -16,9 +17,6 @@ jobs:
         # Needed so that automatically activiating the `test` conda env works
         shell: bash -el {0}
     steps:
-      - uses: actions-ecosystem/action-remove-labels@v1.3.0
-        with:
-          labels: CUDA CI
       - run: |
           env
       - uses: actions/setup-python@v4
