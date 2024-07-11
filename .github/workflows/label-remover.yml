@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   tests:
-    if: contains(github.event.pull_request.labels.*.name, 'CUDA CI')
+    #if: contains(github.event.pull_request.labels.*.name, 'CUDA CI')
     name: Remove "CUDA CI" Label
     runs-on: ubuntu-20.04
     steps:
