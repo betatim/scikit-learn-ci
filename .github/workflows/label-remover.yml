@@ -4,9 +4,9 @@ name: Remove "CUDA CI" Label
 # CUDA CI. It is separate so that we can use the `pull_request_target`
 # trigger which has a API token with write access
 on:
-  pull_request_target:
-    types:
-      - labeled
+  workflow_run:
+    workflows: [CUDA GPU]
+    types: [completed]
 
 # In order to remove the "CUDA CI" label we need to have write permissions for PRs
 permissions:
