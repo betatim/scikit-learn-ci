@@ -1,3 +1,4 @@
+name: CUDA GPU
 on:
   pull_request:
     types:
